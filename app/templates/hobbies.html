@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="./static/styles/main.css">
+</head>
+
+<body>
+
+    <header class="nav-bar">
+
+        <div class="nav-content">
+
+            {% for page in pages %}
+
+            <a href="{{ page.url }}">
+                {{ page.name }}
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+    </header>
+
+    <section>
+
+        <h1>My Hobbies</h1>
+
+        {% for hobby in hobbies %}
+
+        <div>
+
+            <h2>{{ hobby.name }}</h2>
+
+           <img
+            src="{{ url_for('static', filename='img/' + hobby.image) }}"
+            class="hobby-image">
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</body>
+
+</html>
