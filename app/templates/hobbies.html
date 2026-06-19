@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Hobbies{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <h1>Our Hobbies</h1>
+    <p>Things we love outside of code</p>
+</div>
+
+<div class="page-content">
+    {% for member in hobbies %}
+    <section class="content-section">
+        <h2>{{ member.name }}</h2>
+        <div class="hobbies-grid">
+            {% for hobby in member.items %}
+            <div class="hobby-card">
+                {% if hobby.image %}
+                <img src="{{ hobby.image }}" alt="{{ hobby.name }}">
+                {% endif %}
+                <h3>{{ hobby.name }}</h3>
+                <p>{{ hobby.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+</div>
+{% endblock %}
