@@ -102,25 +102,49 @@ naro_travel = [
 
 # ── Jordan's data ────────────────────────────────────────
 jordan_work = [
-    {
-        "title": "Job Title",
-        "company": "Company",
-        "duration": "Month Year – Month Year",
-        "description": "Description.",
+ { 
+        "title": "Production Engineering Fellow",
+        "company": "Meta",
+        "duration": "June 2026 – Present",
+        "bullets": [
+            "Selected for the highly competitive Meta–MLH Production Engineering Fellowship (2% acceptance rate), working on systems development and engineering collaboration.",
+            "Build and deploy an open-source Flask web application, setting up a VPS (DigitalOcean + DuckDNS) and replacing tmux-based deployment with a systemd-managed service with custom bash scripts for uptime and auto-restarts.",
+            "Write 20+ unit and integration tests (unittest, Peewee ORM), increasing API and database test coverage by 90% with sub-2ms test execution.",
+        ],
     },
+    {
+        "title": "Software Engineer Intern",
+        "company": "Irish Life",
+        "duration": "March 2025 – September 2025",
+        "bullets": [
+            "Developed and enhanced multiple C#/.NET applications, delivering 30+ Jira tasks across Agile sprint cycles while collaborating with developers, testers, and business stakeholders.",
+            "Created and optimized SQL queries and database operations, improving data retrieval efficiency and supporting critical business workflows across internal systems.",
+            "Maintained and modernized legacy applications through bug fixes, UI enhancements, and production support, contributing to improved system reliability and user experience.",
+        ]
+    },
+
+    {
+        "title": "Data Center Technician Intern",
+        "company": "Equinix",
+        "duration": "March 2024 – September 2024",
+        "bullets": [
+            "Monitored and supported critical data centre infrastructure, assisting with incident response, asset management, and operational processes within a global colocation environment.",
+            "Analyzed infrastructure alerts, equipment status, and operational data to identify issues, coordinate resolutions, and maintain high availability across customer environments.",
+            "Documented operational procedures and hardware inventory while collaborating with cross-functional teams to improve efficiency, accuracy, and service delivery standards.",
+        ],
+    },
+  
 ]
 
 jordan_education = [
     {
-        "degree": "Degree",
-        "school": "University",
-        "year": "Year",
+        "degree": "Bachelor of Science, Computing and IT",
+        "school": "Technological University Dublin",
+        "year": "2022 – 2026",
     },
 ]
 
-jordan_travel = [
-    {"name": "Home Country", "lat": 0, "lng": 0},
-]
+jordan_travel = []
 
 # ── Hobbies data ─────────────────────────────────────────
 hobbies_data = [
