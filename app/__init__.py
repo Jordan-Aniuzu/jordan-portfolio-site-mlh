@@ -81,23 +81,35 @@ maha_travel = [
 # ── Naro's data ──────────────────────────────────────────
 naro_work = [
     {
-        "title": "Job Title",
-        "company": "Company",
-        "duration": "Month Year – Month Year",
-        "description": "Description.",
+        "title": "Production Engineering Fellow",
+        "company": "Meta",
+        "duration": "June 2026 – Present",
+        "bullets": [
+            "It is a 12 Week collaborative Production Engineering Fellowship partnered with Meta which focuses on working in Site Reliability Engineering and DevOps. This includes:",
+            "Working on projects whilst collaborating in a pod of engineers under direct mentorship from Meta Production Engineers.",
+            "Applying CI/CD practices including automated testing and automated deployments across microservices and serverless architectures.",
+        ],
     },
 ]
 
 naro_education = [
     {
-        "degree": "Degree",
-        "school": "University",
-        "year": "Year",
+        "degree": "Integrated Masters in Computer Science",
+        "school": "Trinity College Dublin",
+        "year": "2024 - 2029",
     },
 ]
 
 naro_travel = [
-    {"name": "Home Country", "lat": 0, "lng": 0},
+    {"name": "Ireland", "lat": 53.1424, "lng": -7.6921},
+    {"name": "United Kingdom", "lat": 55.3781, "lng": -3.4360},
+    {"name": "India", "lat": 20.5937, "lng": 78.9629},
+    {"name": "Germany", "lat": 51.1657, "lng": 10.4515},
+    {"name": "Poland", "lat": 51.9194, "lng": 19.1451},
+    {"name": "Portugal", "lat": 39.3999, "lng": -8.2245},
+    {"name": "Italy", "lat": 41.8719, "lng": 12.5674},
+    {"name": "Switzerland", "lat": 46.8182, "lng": 8.2275},
+    {"name": "Netherlands", "lat": 52.1326, "lng": 5.2913},
 ]
 
 # ── Jordan's data ────────────────────────────────────────
