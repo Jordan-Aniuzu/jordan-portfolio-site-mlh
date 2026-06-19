@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Narottam Slawski{% endblock %}
+
+{% block content %}
+<div class="profile-hero">
+    <div class="profile-hero-photo">
+        <img src="/static/img/naro_photo.jpg" alt="Naro" onerror="this.src='/static/img/logo.jpg'">
+    </div>
+    <div class="profile-hero-text">
+        <h1>Narottam Slawski</h1>
+        <p class="profile-tagline">MLH Fellow</p>
+    </div>
+</div>
+
+<div class="page-content">
+
+    <section class="content-section">
+        <h2>About Me</h2>
+        <p><!-- Naro: add your bio here --></p>
+    </section>
+
+    <section class="content-section">
+        <h2>Work Experience</h2>
+        {% for job in work_experience %}
+        <div class="card">
+            <h3>{{ job.title }}</h3>
+            <h4>{{ job.company }} &mdash; {{ job.duration }}</h4>
+            <p>{{ job.description }}</p>
+        </div>
+        {% endfor %}
+    </section>
+
+    <section class="content-section">
+        <h2>Education</h2>
+        {% for edu in education %}
+        <div class="card">
+            <h3>{{ edu.degree }}</h3>
+            <h4>{{ edu.school }} &mdash; {{ edu.year }}</h4>
+        </div>
+        {% endfor %}
+    </section>
+
+    <section class="content-section">
+        <h2>Places I've Traveled</h2>
+        <div id="travel-map"></div>
+        <div class="map-legend">
+            {% for place in travel_places %}
+            <span class="map-pin-label">📍 {{ place.name }}</span>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    var map = L.map('travel-map').setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var places = {{ travel_places | tojson }};
+    places.forEach(function(place) {
+        L.marker([place.lat, place.lng])
+            .addTo(map)
+            .bindPopup('<strong>' + place.name + '</strong>');
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="MLH PE Squad">
+    <meta property="og:description" content="MLH Fellowship Production Engineering Portfolio">
+    <meta property="og:url" content="{{ url }}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+    <title>{% block title %}MLH PE Squad{% endblock %}</title>
+</head>
+
+<body>
+    <header class="nav-bar">
+        <div class="nav-content">
+            <a href="/">
+                <div class="nav-logo">
+                    <img src="/static/img/logo.svg" alt="MLH Logo" />
+                </div>
+            </a>
+            <nav>
+                {% for page in nav_pages %}
+                <a href="{{ page.url }}" class="nav-link {% if request.path == page.url %}active{% endif %}">
+                    {{ page.name }}
+                </a>
+                {% endfor %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>MLH Fellowship &mdash; Production Engineering Squad</p>
+    </footer>
+</body>
+
+</html>
