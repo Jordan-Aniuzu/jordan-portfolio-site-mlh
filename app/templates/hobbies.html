@@ -8,22 +8,122 @@
     <p>Things we love outside of code</p>
 </div>
 
-<div class="page-content">
-    {% for member in hobbies %}
-    <section class="content-section">
-        <h2>{{ member.name }}</h2>
-        <div class="hobbies-grid">
-            {% for hobby in member.items %}
-            <div class="hobby-card">
-                {% if hobby.image %}
-                <img src="{{ hobby.image }}" alt="{{ hobby.name }}">
-                {% endif %}
-                <h3>{{ hobby.name }}</h3>
-                <p>{{ hobby.description }}</p>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
+<div class="venn-wrap">
+  <svg viewBox="0 0 500 400" class="venn-svg" aria-label="Venn diagram">
+  
+  <!-- Images -->
+  <image
+    href="/static/img/ReadingImage.jpg"
+    x="-25"
+    y="100"
+    width="150"
+    height="150"
+  />
+  <image
+    href="/static/img/EldenRingPoster.jpg"
+    x="373"
+    y="100"
+    width="150"
+    height="150"
+  />
+  <image
+    href="/static/img/Running.jpg"
+    x="150"
+    y="280"
+    width="200"
+    height="150"
+  />
+  
+  
+  <!-- Circles -->
+  <g class="bubble" data-person="Maha">
+    <circle cx="190" cy="130" r="75"
+            fill="rgba(255, 99, 132, 0.35)"
+            stroke="#ff6384"
+            stroke-width="2" />
+    <text x="190" y="50" text-anchor="middle" font-size="18" fill="#111">
+      Maha
+    </text>
+  </g>
+
+  <g class="bubble" data-person="Naro">
+    <circle cx="310" cy="130" r="75"
+            fill="rgba(54, 162, 235, 0.35)"
+            stroke="#36a2eb"
+            stroke-width="2" />
+    <text x="310" y="50" text-anchor="middle" font-size="18" fill="#111">
+      Naro
+    </text>
+  </g>
+
+  <g class="bubble" data-person="Jordan">
+    <circle cx="250" cy="215" r="75"
+            fill="rgba(75, 192, 192, 0.35)"
+            stroke="#4bc0c0"
+            stroke-width="2" />
+    <text x="250" y="305" text-anchor="middle" font-size="18" fill="#111">
+      Jordan
+    </text>
+  </g>
+    
+    <!-- Hobbies -->
+    {% for hobby in hobbies %}
+      <text
+            class="hobby-label"
+            data-people="{{ hobby.people | join(',') }}"
+            x="{{ hobby.pos[0] }}" y="{{ hobby.pos[1] }}"
+            text-anchor="middle"
+            font-size="11"
+            fill="#111">
+        {% for line in hobby.name %}
+          <tspan x="{{ hobby.pos[0] }}" dy="{% if loop.first %}0{% else %}1.2em{% endif %}">
+            {{ line }}
+          </tspan>
+        {% endfor %}
+      </text>
     {% endfor %}
+  </svg>
+  <script>
+    const bubbles = document.querySelectorAll(".bubble");
+    const hobbyLabels = document.querySelectorAll(".hobby-label");
+
+    bubbles.forEach((bubble) => {
+      bubble.addEventListener("mouseenter", () => {
+        const person = bubble.dataset.person;
+
+        bubbles.forEach((b) => {
+          b.classList.remove("active", "dim");
+        });
+
+        bubble.classList.add("active");
+
+        bubbles.forEach((b) => {
+          if (b !== bubble) {
+            b.classList.add("dim");
+          }
+        });
+
+        hobbyLabels.forEach((label) => {
+          const people = label.dataset.people.split(",");
+          if (people.includes(person)) {
+            label.classList.add("active");
+          } else {
+            label.classList.remove("active");
+            label.classList.add("dim");
+          }
+        });
+      });
+
+      bubble.addEventListener("mouseleave", () => {
+        bubbles.forEach((b) => {
+          b.classList.remove("active", "dim");
+        });
+
+        hobbyLabels.forEach((label) => {
+          label.classList.remove("active", "dim");
+        });
+      });
+    });
+  </script>
 </div>
 {% endblock %}
