@@ -29,8 +29,6 @@ maha_work = [
         "duration": "June 2026 – Present",
         "bullets": [
             "Selected for the highly competitive Meta–MLH Production Engineering Fellowship (2% acceptance rate), working on systems development and engineering collaboration.",
-            "Build and deploy an open-source Flask web application, setting up a VPS (DigitalOcean + DuckDNS) and replacing tmux-based deployment with a systemd-managed service with custom bash scripts for uptime and auto-restarts.",
-            "Write 20+ unit and integration tests (unittest, Peewee ORM), increasing API and database test coverage by 90% with sub-2ms test execution.",
         ],
     },
     {
@@ -38,9 +36,7 @@ maha_work = [
         "company": "Regen Network Development",
         "duration": "June 2026 – Present",
         "bullets": [
-            "Build a production-grade Python SDK ('regen-network/sensor-sdk') and CLI for ingesting multi-source data (transcripts, RSS, APIs) into Regen's claims pipeline, enabling developers to publish structured evidence in <20 lines of code.",
-            "Design and implement the Output Record contract (JSON-LD + RDF), including consent-envelope handling and RID-based identifiers, integrating end-to-end with the KOI Claims Engine to generate on-chain attestations.",
-            "Develop and deploy ingestion pipelines with polling, parsing, and idempotent retries; ship CI-tested package (≥80% coverage) and reproducible local-first workflows for external developer adoption.",
+            "Built a production-grade Python SDK and CLI for ingesting multi-source data into Regen's claims pipeline; designed the Output Record contract (JSON-LD + RDF) integrating with the KOI Claims Engine; shipped CI-tested ingestion pipelines (≥80% coverage) with reproducible local-first developer workflows.",
         ],
     },
     {
@@ -48,9 +44,8 @@ maha_work = [
         "company": "Leeds Gryphon Racing",
         "duration": "November 2025 – Present",
         "bullets": [
-            "Developing a real-time computer vision and object detection pipeline for an autonomous Formula Student vehicle, enabling reliable identification of track boundaries and dynamic obstacles at high-speed.",
-            "Implementing LiDAR–camera sensor fusion pipelines using ROS2 to enhance spatial awareness and perception reliability under variable lighting and environmental conditions.",
             "Leading a multi-disciplinary AI-perception team, coordinating model development, system integration and testing cycles within a competitive Formula Student engineering programme.",
+            "Implementing LiDAR–camera sensor fusion pipelines using ROS2 to enhance spatial awareness and perception reliability under variable lighting and environmental conditions.",
         ],
     },
     {
@@ -58,9 +53,7 @@ maha_work = [
         "company": "University of Leeds – Engineering and Physical Sciences Faculty",
         "duration": "December 2025 – January 2026",
         "bullets": [
-            "Implemented the Condense & Distil summation algorithm in C++ under academic supervision, producing a performance-oriented library designed to improve numerical accuracy without sacrificing computational efficiency.",
-            "Designed a user-friendly API to minimise integration effort with existing numerical software, enabling the library to function as a drop-in component for scientific computing workflows.",
-            "Documented the algorithm's design and implementation outcomes, contributing to a foundation that could support future academic publication or open-source release.",
+            "Implemented the Condense & Distil summation algorithm in C++ under academic supervision, designing a drop-in API for seamless integration with existing numerical software and documenting outcomes to support future academic publication.",
         ],
     },
 ]
