@@ -245,7 +245,7 @@ def hobbies():
 
     return render_template('hobbies.html', hobbies=hobbies_data)
 
-@app.route('/api/timeline_post', methods=['POST']
+@app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
 	name = request.form['name']
 	email = request.form['email']
