@@ -3,26 +3,27 @@ from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from peewee import MySQLDatabase
 from datetime import datetime
-from playhouse.shortcuts import model_to_dict
+from playhouse.shortcuts import model_to_dict, Model, CharField, TextField, DateTimeField
+
 
 load_dotenv()
 app = Flask(__name__)
 
-mydp = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
     user=os.getenv("MYSQL_USER"),
     password=os.getenv("MYSQL_PASSWORD"),
     host=os.getenv("MYSQL_HOST"),
     port=3306
 )
 
-print(mydp)
+print(mydb)
 
 class TimelinePost(Model):
 	name = CharField()
 	email = CharField()
 	content = TextField()
-	created_at = DateTimeField(default=datetime.datetime.now)
-	
+	created_at = DateTimeField(default=datetime.now)
+
 	class Meta:
 		database = mydb
 
@@ -259,6 +260,6 @@ def get_time_line_post():
 	return {
 		'timeline_posts': [
 			model_to_dict(p)
-			for p in TimelinePost.select().order_by(TimelinePost.created_at.desc
+			for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
 		]
 	}
