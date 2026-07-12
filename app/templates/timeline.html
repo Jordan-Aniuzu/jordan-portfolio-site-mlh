@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Timeline{% endblock %}
+
+{% block content %}
 <h1>Timeline</h1>
 
 <form id="form">
@@ -14,8 +19,8 @@ const posts = document.getElementById('posts');
 
 function show(p) {
 	const el = document.createElement('div');
-	el.innerHTML = '<strong>${p.name}</strong>: ${p.content} <small>(${p.created_at})</small>';
-	posts.prepend(el);
+	el.innerHTML = `<strong>${p.name}</strong>: ${p.content} <small>(${p.created_at})</small>`;
+	posts.appendChild(el);
 }
 
 fetch('/api/timeline_post')
@@ -25,7 +30,11 @@ fetch('/api/timeline_post')
 document.getElementById('form').addEventListener('submit', async e => {
 	e.preventDefault();
 	const res = await fetch('/api/timeline_post', { method: 'POST', body: new FormData(e.target) });
-	show(await res.json());
+	const p = await res.json();
+	const el = document.createElement('div');
+	el.innerHTML = `<strong>${p.name}</strong>: ${p.content} <small>(${p.created_at})</small>`;
+	posts.prepend(el);
 	e.target.reset();
 });
 </script>
+{% endblock %}

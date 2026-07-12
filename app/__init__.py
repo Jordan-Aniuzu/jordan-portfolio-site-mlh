@@ -36,6 +36,7 @@ nav_pages = [
     {"name": "Narottam", "url": "/naro"},
     {"name": "Jordan", "url": "/jordan"},
     {"name": "Hobbies", "url": "/hobbies"},
+    {"name": "Timeline", "url": "/timeline"},
 ]
 
 @app.context_processor
