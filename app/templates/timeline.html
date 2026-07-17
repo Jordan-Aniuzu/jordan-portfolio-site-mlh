@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timeline</title>
+</head>
+
+<body>
+
+<h1>Timeline</h1>
+
+<form id="timeline-form">
+    <input id="name" placeholder="Name" required>
+    <input id="email" placeholder="Email" required>
+    <textarea id="content" placeholder="What's happening?" required></textarea>
+    <button type="submit">Post</button>
+</form>
+
+
+<h2>Posts</h2>
+
+<div id="posts"></div>
+
+
+<script>
+
+async function loadPosts() {
+    const response = await fetch('/api/timeline_post');
+    const data = await response.json();
+
+    const postsDiv = document.getElementById("posts");
+    postsDiv.innerHTML = "";
+
+    data.timeline_posts.forEach(post => {
+        postsDiv.innerHTML += `
+            <div>
+                <h3>${post.name}</h3>
+                <p>${post.content}</p>
+                <small>${post.created_at}</small>
+            </div>
+            <hr>
+        `;
+    });
+}
+
+
+document.getElementById("timeline-form")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    await fetch('/api/timeline_post', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            content: document.getElementById("content").value
+        })
+    });
+
+
+    document.getElementById("timeline-form").reset();
+
+    loadPosts();
+});
+
+
+loadPosts();
+
+</script>
+
+</body>
+</html>

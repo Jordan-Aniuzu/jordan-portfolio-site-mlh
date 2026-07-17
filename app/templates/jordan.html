@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Jordan Aniuzu{% endblock %}
+
+{% block content %}
+<div class="profile-hero">
+    <div class="profile-hero-photo">
+        <img src="/static/img/jordan_photo.jpg" alt="Jordan" onerror="this.src='/static/img/logo.jpg'">
+    </div>
+    <div class="profile-hero-text">
+        <h1>Jordan Aniuzu</h1>
+        <p class="profile-tagline">MLH Fellow</p>
+    </div>
+</div>
+
+<div class="page-content">
+
+    <section class="content-section">
+        <h2>About Me</h2>
+        <p>Final-year Computing & IT student at Technological University Dublin with experience across software engineering, data centers, and technical mentoring.
+        Passionate about building practical solutions, learning new technologies, and contributing to impactful projects. 
+        Currently a Meta x MLH Production Engineering Fellow and incoming Developer Support Specialist at Irish Life.
+    </p>
+    </section>
+
+  <section class="content-section">
+    <h2>Work Experience</h2>
+
+    {% for job in work_experience %}
+    <div class="card">
+        <h3>{{ job.title }}</h3>
+        <h4>{{ job.company }} &mdash; {{ job.duration }}</h4>
+
+        <ul>
+            {% for bullet in job.bullets %}
+            <li>{{ bullet }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</section>
+
+    <section class="content-section">
+        <h2>Education</h2>
+        {% for edu in education %}
+        <div class="card">
+            <h3>{{ edu.degree }}</h3>
+            <h4>{{ edu.school }} &mdash; {{ edu.year }}</h4>
+        </div>
+        {% endfor %}
+    </section>
+
+<section class="content-section">
+    <h2>Places I've Traveled</h2>
+
+    <iframe 
+    src="https://www.google.com/maps/d/u/0/embed?mid=15elXToFJQqlH0JrO3WMa-O-ahHqZnfU&ehbc=2E312F"
+    width="640"
+    height="480">
+</iframe>
+</section>
+</div>
+
+{% endblock %}
