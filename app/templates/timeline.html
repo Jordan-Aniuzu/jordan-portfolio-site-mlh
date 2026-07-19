@@ -1,75 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Timeline</title>
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block title %}Timeline{% endblock %}
 
+{% block content %}
 <h1>Timeline</h1>
 
-<form id="timeline-form">
-    <input id="name" placeholder="Name" required>
-    <input id="email" placeholder="Email" required>
-    <textarea id="content" placeholder="What's happening?" required></textarea>
-    <button type="submit">Post</button>
+<form id="form">
+	<input name="name" placeholder="Name" required>
+	<input name="email" type="email" placeholder="Email" required>
+	<textarea name="content" placeholder="Say something..." required></textarea>
+	<button type="submit">Post</button>
 </form>
-
-
-<h2>Posts</h2>
 
 <div id="posts"></div>
 
-
 <script>
+const posts = document.getElementById('posts');
 
-async function loadPosts() {
-    const response = await fetch('/api/timeline_post');
-    const data = await response.json();
-
-    const postsDiv = document.getElementById("posts");
-    postsDiv.innerHTML = "";
-
-    data.timeline_posts.forEach(post => {
-        postsDiv.innerHTML += `
-            <div>
-                <h3>${post.name}</h3>
-                <p>${post.content}</p>
-                <small>${post.created_at}</small>
-            </div>
-            <hr>
-        `;
-    });
+function show(p) {
+	const el = document.createElement('div');
+	el.innerHTML = `<strong>${p.name}</strong>: ${p.content} <small>(${p.created_at})</small>`;
+	posts.appendChild(el);
 }
 
+fetch('/api/timeline_post')
+	.then(r => r.json())
+	.then(d => d.timeline_posts.forEach(show));
 
-document.getElementById("timeline-form")
-.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    await fetch('/api/timeline_post', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            content: document.getElementById("content").value
-        })
-    });
-
-
-    document.getElementById("timeline-form").reset();
-
-    loadPosts();
+document.getElementById('form').addEventListener('submit', async e => {
+	e.preventDefault();
+	const res = await fetch('/api/timeline_post', { method: 'POST', body: new FormData(e.target) });
+	const p = await res.json();
+	const el = document.createElement('div');
+	el.innerHTML = `<strong>${p.name}</strong>: ${p.content} <small>(${p.created_at})</small>`;
+	posts.prepend(el);
+	e.target.reset();
 });
-
-
-loadPosts();
-
 </script>
-
-</body>
-</html>
+{% endblock %}

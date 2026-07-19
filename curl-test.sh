@@ -1,21 +1,20 @@
 #!/bin/bash
 
+URL="http://localhost:5000/api/timeline_post"
 
-URL="http://localhost:5001/api/timeline_post"
+RANDOM_ID=$RANDOM
+NAME="TestName_$RANDOM_ID"
+EMAIL="Test_$RANDOM_ID@gmail.com"
+CONTENT="This is test $RANDOM_ID"
 
-NAME="Jordan Test"
-EMAIL="jordan@test.com"
-CONTENT="Automated curl test post"
+echo "Testing"
+curl $URL
 
-echo "Creating timeline post..."
+RESPONSE=$(curl --request POST $URL -d "name=$NAME&email=$EMAIL&content=$CONTENT")
+POST_ID=$(echo "$RESPONSE" | grep -o '"id":[0-9]*' | grep -o '[0-9]*')
 
-curl -X POST $URL \
--d "name=$NAME" \
--d "email=$EMAIL" \
--d "content=$CONTENT"
+curl $URL | grep -q "$CONTENT" && echo "Found!" || echo "Not found!"
 
-echo ""
-
-echo "Checking timeline posts..."
+curl --request DELETE "$URL/$POST_ID"
 
 curl $URL

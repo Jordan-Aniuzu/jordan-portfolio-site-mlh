@@ -5,6 +5,10 @@ from playhouse.shortcuts import model_to_dict
 from peewee import *
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
+from peewee import MySQLDatabase
+from datetime import datetime
+from playhouse.shortcuts import model_to_dict, Model, CharField, TextField, DateTimeField
+
 
 load_dotenv()
 app = Flask(__name__)
@@ -24,7 +28,7 @@ class TimelinePost(Model):
     name = CharField()
     email = CharField()
     content = TextField()
-    created_at = DateTimeField(default=datetime.datetime.now)
+    created_at = DateTimeField(default=datetime.now)
 
     class Meta:
         database = mydb
@@ -38,6 +42,7 @@ nav_pages = [
     {"name": "Narottam", "url": "/naro"},
     {"name": "Jordan", "url": "/jordan"},
     {"name": "Hobbies", "url": "/hobbies"},
+    {"name": "Timeline", "url": "/timeline"},
 ]
 
 @app.context_processor
@@ -245,11 +250,8 @@ def hobbies():
     for hobby in hobbies_data:
         key = frozenset(hobby["people"])
         hobby["pos"] = circle_positions.get(key, (250, 175))
-    
+
     return render_template('hobbies.html', hobbies=hobbies_data)
-
-
-
 
 
 
@@ -279,6 +281,13 @@ def get_time_line_post():
         ]
     }
 
+@app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
+def delete_time_line_post(post_id):
+	post = TimelinePost.get_or_none(TimelinePost.id == post_id)
+	if post is None:
+		return {'error': 'Post not found'}, 404
+	post.delete_instance()
+	return {'deleted': post_id}
 
 
 @app.route('/timeline')
